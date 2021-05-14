@@ -1,0 +1,18 @@
+{
+    "notatki": [
+        {
+            "przedmiot": "programowanie C#",
+            "zaliczenie": "API restowe",
+            "termin": "26.05.2021",
+            "notatka": "Stworzyć API restowe blablabla",
+            "wazne": false
+        },
+        {
+            "przedmiot": "programowanie Java",
+            "zaliczenie": "Projekt netbeans + SQL",
+            "termin": "22.05.2021",
+            "notatka": "Aplikacja biznesowa w netbeans z wykorzystaniem Java JPA. Ważne: bezpieczne połączenie z bazą danych.",
+            "wazne": true
+        }
+    ]
+}

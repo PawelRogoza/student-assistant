@@ -1,7 +1,8 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <span class="navSpan"><router-link to="/">Przedmioty</router-link></span>
+    <span class="navSpan"><router-link to="/panel">Panel użytkownika</router-link></span>
+    <span class="navSpan"><router-link to="/ustawienia">Ustawienia</router-link></span>
   </div>
   <router-view/>
 </template>
@@ -13,6 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: rgb(235,235,235);
 }
 
 #nav {
@@ -20,11 +22,18 @@
 }
 
 #nav a {
-  font-weight: bold;
+  font-weight: 600;
   color: #2c3e50;
+  padding: 10px;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: white;
+  background: lightseagreen;
+  border-radius: 7px;
+}
+.navSpan {
+  padding: 0 35px 0 35px;
 }
 </style>

@@ -12,7 +12,7 @@
       <input type="date" v-model="termin" />
 
       <label for="notatki">Notatki</label>
-      <textarea cols="30" rows="10" v-model="notatki"></textarea>
+      <textarea cols="30" rows="10" v-model="notatka"></textarea>
 
       <label id="wazne">Ważne: </label>
       <input type="checkbox" v-model="wazne" value />
@@ -22,56 +22,54 @@
       </div>
     </form>
   </div>
-  <ul class="notatkiLista" v-if="pokazNotatke">
-    <li class="notatkiElement" v-for="notatka in zapis" :key="notatka">
-      <strong>{{ notatka.przedmiot }}</strong> - {{ notatka.zaliczenie }}<br />
-      {{ notatka.termin }}<br />
-      {{ notatka.notatka }}<br /><br />
-    </li>
-  </ul>
-  <button class="pokaz" @click="pokazNotatki">Notatki</button>
-
-  <!-- TODO
-  Możliwość zapisywania notatek, 
-  terminów zaliczeń, deadlinów w terminarzu -->
 </template>
 
 <script>
 export default {
   name: "Przedmioty",
   data() {
-    return {
-      przedmiot: "",
-      zaliczenie: "",
-      termin: "",
-      notatki: "",
-      wazne: false,
-      zapis: [],
-      pokazNotatke: true,
-    };
-  },
-  mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
-    fetch("http://localhost:3000/notatki").then((res) => {
-      res
-        .json()
-        .then((data) => (this.zapis = data))
-        .catch((err) => console.log(err.message));
-    });
+    return{
+      notatka:null,
+      przedmiot:"",
+      zaliczenie:"",
+      termin:"",
+      notatka:"",
+      wazne:""
+    }
   },
   methods: {
-    pokazNotatki() {
-      this.pokazNotatke = !this.pokazNotatke;
-      console.log("pokaz");
-    },
-    dodajNotatke(e) {
-      e.preventDefault(e);
-      
+    dodajNotatke() {
+
+      this.notatka = {
+        przedmiot:this.przedmiot,
+        zaliczenie:this.zaliczenie,
+        termin:this.termin,
+        notatka:this.notatka,
+        wazne:this.wazne
+      };
+
+      fetch("http://localhost:3000/notatki", {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(this.notatka)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      alert("Dodano notatke");
     }
   },
 };
 </script>
 
-<style scoped>
+<style>
 form,
 .notatkiLista {
   width: 500px;
@@ -130,6 +128,19 @@ textarea:focus {
 .pokaz:hover {
   transform: scale(1.12);
 }
+.usun {
+  background: red;
+  color: black;
+  margin: 1px;
+  border: solid black 1px;
+  border-radius: 3px;
+  width: 25px;
+  height: 25px;
+  float: right;
+}
+.usun:hover {
+  transform: scale(1.12);
+}
 #wazne {
   font-size: 13px;
   font-style: italic;
@@ -154,8 +165,10 @@ input[type="checkbox"] {
 .notatkiElement {
   display: block;
   justify-content: center;
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
   outline: 1px solid #000;
+}
+.notatkiContent{
+  padding: 10px;
 }
 </style>

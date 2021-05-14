@@ -1,25 +1,12 @@
 {
-    "notatki": [
-        {
-            "przedmiot": "programowanie C#",
-            "zaliczenie": "API restowe",
-            "termin": "26.05.2021",
-            "notatka": "Stworzyć API restowe blablabla",
-            "wazne": false
-        },
-        {
-            "przedmiot": "programowanie Java",
-            "zaliczenie": "Projekt netbeans + SQL",
-            "termin": "22.05.2021",
-            "notatka": "Aplikacja biznesowa w netbeans z wykorzystaniem Java JPA. Ważne: bezpieczne połączenie z bazą danych.",
-            "wazne": true
-        },
-        {
-            "przedmiot": "ABC Prawa",
-            "zaliczenie": "Egzamin 15 pytań",
-            "termin": "27.05.2021",
-            "notatka": "Przejrzeć prezke",
-            "wazne": false
-        }
-    ]
+  "notatki": [
+    {
+      "przedmiot": "ABC Prawa",
+      "zaliczenie": "Egzamin 15 pytań",
+      "termin": "2021-05-30",
+      "notatka": "Prosty egzamin, nauczyć się z prezki",
+      "wazne": true,
+      "id": 1
+    }
+  ]
 }

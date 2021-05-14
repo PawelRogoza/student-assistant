@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Przedmioty from '../views/Przedmioty.vue'
-import PanelUzytkownika from '../views/PanelUzytkownika.vue'
-import Ustawienia from '../views/Ustawienia.vue'
+import Notatki from '../views/Notatki.vue'
+import Kalkulator from '../views/Kalkulator.vue'
 
 const routes = [
   {
@@ -10,14 +10,14 @@ const routes = [
     component: Przedmioty
   },
   {
-    path: '/panel',
-    name: 'PanelUzytkownika',
-    component: PanelUzytkownika,
+    path: '/notatki',
+    name: 'Notatki',
+    component: Notatki,
   },
   {
-    path: '/ustawienia',
-    name: 'Ustawienia',
-    component: Ustawienia,
+    path: '/kalkulator',
+    name: 'Kalkulator',
+    component: Kalkulator,
   }
 ]
 

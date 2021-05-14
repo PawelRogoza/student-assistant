@@ -1,8 +1,8 @@
 <template>
   <div id="nav">
     <span class="navSpan"><router-link to="/">Przedmioty</router-link></span>
-    <span class="navSpan"><router-link to="/panel">Panel użytkownika</router-link></span>
-    <span class="navSpan"><router-link to="/ustawienia">Ustawienia</router-link></span>
+    <span class="navSpan"><router-link to="/notatki">Notatki</router-link></span>
+    <span class="navSpan"><router-link to="/kalkulator">Kalkulator</router-link></span>
   </div>
   <router-view/>
 </template>

@@ -48,12 +48,11 @@ export default {
     return {
       zapis: [],
       pokazNotatke: true,
-      tempEditID: "",
-      tempPrzedmiot:"",
-      tempZaliczenie:"",
-      tempTermin:"",
-      tempNotatka:"",
-      tempWazne:""
+      tempPrzedmiot: "",
+      tempZaliczenie: "",
+      tempTermin: "",
+      tempNotatka: "",
+      tempWazne: false
     };
   },
   mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
@@ -84,26 +83,27 @@ export default {
     },
     edytujNotatke(id){
       var element = document.getElementById("editForm");
+      let tempAll;
+
       element.hidden = !element.hidden;
       alert("Edytowanie notatki ["+id+"]");
-      this.tempEditID = id;
-    },
-    edytujNotatkeForm(){
-      console.log(this.tempEditID);
-      var editedJSON = {};
 
-      fetch("http://localhost:3000/notatki/"+this.tempEditID, {
+      console.log(id);
+      fetch("http://localhost:3000/notatki/"+id, {
         method: 'GET'
       })
       .then((res) => {
         res
           .json()
-          .then((data) => (editedJSON = data))
+          .then(function(json){
+            tempAll = json;
+          })
           .catch((err) => console.log(err.message));
       });
-
-      alert("Edytowano notatke ["+this.tempEditID+"]");
-      console.log(editedJSON);
+      console.log(tempAll)
+    },
+    edytujNotatkeForm(){
+      alert("Edytowano notatke ["+tempEditID+"]");
     }
   },
 };

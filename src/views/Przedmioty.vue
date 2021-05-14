@@ -12,7 +12,7 @@
       <input type="date" v-model="termin" />
 
       <label for="notatki">Notatki</label>
-      <textarea cols="30" rows="10" v-model="notatka"></textarea>
+      <textarea placeholder="Wpisz swoją notatkę..." cols="30" rows="10" v-model="notatka"></textarea>
 
       <label id="wazne">Ważne: </label>
       <input type="checkbox" v-model="wazne" value />
@@ -72,11 +72,12 @@ export default {
 <style>
 form,
 .notatkiLista {
-  width: 500px;
+  width: 50%;
   background: white;
-  margin: 35px auto;
+  margin: 50px auto;
   padding: 35px;
-  border-radius: 15px;
+  border-radius: 20px;
+  border: 1px solid black;
 }
 label {
   display: block;
@@ -92,7 +93,7 @@ textarea {
   padding: 10px 0 0 10px;
   width: 100%;
   border: none;
-  border-bottom: 1px solid darkgray;
+  border-bottom: 1px solid black;
 }
 input:focus,
 textarea:focus {
@@ -114,7 +115,7 @@ textarea:focus {
   justify-content: center;
 }
 .zapisz:hover {
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 .pokaz {
   background: lightseagreen;
@@ -126,7 +127,20 @@ textarea:focus {
   width: 100px;
 }
 .pokaz:hover {
-  transform: scale(1.12);
+  transform: scale(1.1);
+}
+.edytuj {
+  background: greenyellow;
+  color: black;
+  margin: 1px;
+  border: solid black 1px;
+  border-radius: 3px;
+  width: 25px;
+  height: 25px;
+  float: right;
+}
+.edytuj:hover {
+  transform: scale(1.1);
 }
 .usun {
   background: red;
@@ -139,7 +153,7 @@ textarea:focus {
   float: right;
 }
 .usun:hover {
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 #wazne {
   font-size: 13px;

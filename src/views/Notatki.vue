@@ -6,6 +6,7 @@
     <ul class="notatkiLista" v-if="pokazNotatke">
       <li class="notatkiElement" v-for="notatka in zapis" :key="notatka">
         <button class="usun" @click="usunNotatke(notatka.id)">X</button>
+        <button class="edytuj" @click="edytujNotatke(notatka.id)">✎</button>
         <div class="notatkiContent" >
           <strong>{{ notatka.przedmiot }}</strong> - {{ notatka.zaliczenie }}<br />
           {{ notatka.termin }}<br />
@@ -13,7 +14,26 @@
         </div>
       </li>
     </ul>
-    <button class="pokaz" @click="pokazNotatki">Notatki</button>
+    <form id="editForm" hidden="true" @submit="edytujNotatkeForm">
+      <label for="przedmiot">Przedmiot</label>
+      <input type="text" v-model="tempPrzedmiot" />
+
+      <label for="zaliczenie">Temat zaliczenia</label>
+      <input type="text" v-model="tempZaliczenie" />
+
+      <label for="termin">Termin zaliczenia</label>
+      <input type="date" v-model="tempTermin" />
+
+      <label for="notatki">Notatki</label>
+      <textarea placeholder="Wpisz swoją notatkę..." cols="30" rows="10" v-model="tempNotatka"></textarea>
+
+      <label id="wazne">Ważne: </label>
+      <input type="checkbox" v-model="tempWazne" value />
+
+      <div class="wrap">
+        <button class="zapisz">Dodaj</button>
+      </div>
+    </form>
   </div>
 
   <!-- TODO
@@ -28,6 +48,12 @@ export default {
     return {
       zapis: [],
       pokazNotatke: true,
+      tempEditID: "",
+      tempPrzedmiot:"",
+      tempZaliczenie:"",
+      tempTermin:"",
+      tempNotatka:"",
+      tempWazne:""
     };
   },
   mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
@@ -55,7 +81,29 @@ export default {
         console.error('Error:', error);
       });
       alert("Usuniętko notatke ["+id+"]");
-      window.location.reload();
+    },
+    edytujNotatke(id){
+      var element = document.getElementById("editForm");
+      element.hidden = !element.hidden;
+      alert("Edytowanie notatki ["+id+"]");
+      this.tempEditID = id;
+    },
+    edytujNotatkeForm(){
+      console.log(this.tempEditID);
+      var editedJSON = {};
+
+      fetch("http://localhost:3000/notatki/"+this.tempEditID, {
+        method: 'GET'
+      })
+      .then((res) => {
+        res
+          .json()
+          .then((data) => (editedJSON = data))
+          .catch((err) => console.log(err.message));
+      });
+
+      alert("Edytowano notatke ["+this.tempEditID+"]");
+      console.log(editedJSON);
     }
   },
 };

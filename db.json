@@ -13,6 +13,13 @@
             "termin": "22.05.2021",
             "notatka": "Aplikacja biznesowa w netbeans z wykorzystaniem Java JPA. Ważne: bezpieczne połączenie z bazą danych.",
             "wazne": true
+        },
+        {
+            "przedmiot": "ABC Prawa",
+            "zaliczenie": "Egzamin 15 pytań",
+            "termin": "27.05.2021",
+            "notatka": "Przejrzeć prezke",
+            "wazne": false
         }
     ]
 }

@@ -46,7 +46,7 @@ export default {
       console.log(this.oceny);
     },
     cofnijOcene() {
-      this.oceny.pop()
+      if(this.oceny != null && this.oceny.length > 0) this.oceny.pop();
     },
     dodajLPrzedmiotow(e) {
       e.preventDefault();

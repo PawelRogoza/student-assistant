@@ -72,7 +72,7 @@ export default {
 <style>
 form,
 .notatkiLista {
-  width: 50%;
+  width: 45%;
   background: white;
   margin: 50px auto;
   padding: 35px;
@@ -133,6 +133,7 @@ textarea:focus {
   background: greenyellow;
   color: black;
   margin: 1px;
+  margin-top: 2px;
   border: solid black 1px;
   border-radius: 3px;
   width: 25px;
@@ -146,6 +147,7 @@ textarea:focus {
   background: red;
   color: black;
   margin: 1px;
+  margin-top: 2px;
   border: solid black 1px;
   border-radius: 3px;
   width: 25px;

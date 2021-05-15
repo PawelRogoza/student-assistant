@@ -6,9 +6,10 @@
     <ul class="notatkiLista" v-if="pokazNotatke">
       <li class="notatkiElement" v-for="notatka in zapis" :key="notatka">
         <button class="usun" @click="usunNotatke(notatka.id)">X</button>
-        <button class="edytuj" @click="edytujNotatke(notatka.id)">✎</button>
-        <div class="notatkiContent" >
-          <strong>{{ notatka.przedmiot }}</strong> - {{ notatka.zaliczenie }}<br />
+        <button class="edytuj" @click="edytujNotatke(notatka.id)">&#9998;</button>
+        <div class="notatkiContent" :class="{'wazne': notatka.wazne}">
+          <strong>{{ notatka.przedmiot }}</strong> - {{ notatka.zaliczenie
+          }}<br />
           {{ notatka.termin }}<br />
           {{ notatka.notatka }}<br />
         </div>
@@ -25,10 +26,15 @@
       <input type="date" v-model="tempTermin" />
 
       <label for="notatki">Notatki</label>
-      <textarea placeholder="Wpisz swoją notatkę..." cols="30" rows="10" v-model="tempNotatka"></textarea>
+      <textarea
+        placeholder="Wpisz swoją notatkę..."
+        cols="30"
+        rows="10"
+        v-model="tempNotatka"
+      ></textarea>
 
       <label id="wazne">Ważne: </label>
-      <input type="checkbox" v-model="tempWazne" value />
+      <input type="checkbox" v-model="tempWazne"/>
 
       <div class="wrap">
         <button class="zapisz">Dodaj</button>
@@ -56,14 +62,17 @@ export default {
     };
   },
   mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
-    fetch("http://localhost:3000/notatki").then((res) => {
+    this.pobierzNotatki()
+  },
+  methods: {
+    pobierzNotatki() {
+      fetch("http://localhost:3000/notatki").then((res) => {
       res
         .json()
         .then((data) => (this.zapis = data))
         .catch((err) => console.log(err.message));
     });
-  },
-  methods: {
+    },
     pokazNotatki() {
       this.pokazNotatke = !this.pokazNotatke;
       console.log("pokaz");
@@ -108,3 +117,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.wazne {
+  border: 1px solid lightseagreen;
+}
+</style>

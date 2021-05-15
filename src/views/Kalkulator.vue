@@ -3,10 +3,13 @@
 
   <form>
     <label>Wpisz oceny</label>
-    <input type="text" v-model.number="ocena" @keypress.enter="dodajOcene" />
+    <input placeholder="Kliknij enter, aby dodać..." type="text" v-model.number="ocena" @keypress.enter="dodajOcene" />
     <span class="errorMessage" v-show="pokazError">Wprowadź poprawną liczbę</span>
 
-    <span v-for="ocena in oceny" :key="ocena">{{ocena}}, </span>
+    <span class="usunOcene" @click="cofnijOcene">⌫</span>
+    <span class="dodajOcene" @click="dodajOcene">&#9745;</span>
+
+    <br><span class="oceny" v-for="ocena in oceny" :key="ocena">{{ocena}}&nbsp;&nbsp;&nbsp;</span>
   </form>
   <button class="obliczSrednia" @click="obliczSrednia">Oblicz średnią</button>
   <button class="obliczSrednia" @click="resetujSrednia">Reset</button>
@@ -41,6 +44,9 @@ export default {
       }
       this.ocena = "";
       console.log(this.oceny);
+    },
+    cofnijOcene() {
+      this.oceny.pop()
     },
     dodajLPrzedmiotow(e) {
       e.preventDefault();
@@ -80,7 +86,7 @@ export default {
   margin-top: 30px;
   border: 0;
   border-radius: 13px;
-  width: 20%;
+  width: 15%;
 }
 .obliczSrednia:hover {
   transform: scale(1.1);
@@ -96,5 +102,30 @@ export default {
 }
 .dodaj {
   display: inline-block;
+}
+.usunOcene {
+  display: inline;
+  float: right;
+  color: lightseagreen;
+  font-size: 20px;
+}
+.usunOcene:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.oceny {
+  color: gray;
+  font-size: 16px;
+}
+.dodajOcene {
+  display: inline;
+  float: right;
+  color: lightseagreen;
+  font-size: 20px;
+  margin-right: 5px;
+}
+.dodajOcene:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 </style>

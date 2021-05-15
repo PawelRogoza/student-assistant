@@ -9,15 +9,16 @@
 
 <style>
 #app {
-  width: 100vw;
-  height: 98vh;
-  display: block;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: rgb(235,235,235);
+}
+
+body {
+  min-height:100vh;
+  background-color: rgb(235, 235, 235);
 }
 
 #nav {

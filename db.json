@@ -1,27 +1,27 @@
 {
   "notatki": [
     {
-      "przedmiot": "ABC Prawa",
-      "zaliczenie": "Egzamin 15 pytań",
-      "termin": "2021-05-30",
-      "notatka": "Prosty egzamin, nauczyć się z prezki",
-      "wazne": true,
+      "przedmiot": "ABC",
+      "zaliczenie": "Porzuczek - api",
+      "termin": "2021-05-29",
+      "notatka": "API dla Porzuczka - REST, C#, ASP.NET",
+      "wazne": "",
       "id": 1
     },
     {
-      "przedmiot": "Sieci",
-      "zaliczenie": "Jakieś finale i practicy z dupy",
-      "termin": "2021-06-01",
-      "notatka": "Jazda z odpowiedzi",
+      "przedmiot": "XD",
+      "zaliczenie": "Porzuczek - api",
+      "termin": "2021-05-29",
+      "notatka": "API dla Porzuczka - REST, C#, ASP.NET",
       "wazne": "",
       "id": 2
     },
     {
-      "przedmiot": "Java",
-      "zaliczenie": "Projekt w Netbeans",
-      "termin": "2021-05-20",
-      "notatka": "Bezpieczne połączenie z bazą - JPA",
-      "wazne": true,
+      "przedmiot": "C#",
+      "zaliczenie": "Projekcik do łysego",
+      "termin": "2021-05-28",
+      "notatka": "Hehe :)",
+      "wazne": "",
       "id": 3
     },
     {

@@ -17,7 +17,7 @@
     </ul>
     <form id="editForm" hidden="true" @submit="edytujNotatkeForm">
       <label for="przedmiot">Przedmiot</label>
-      <input type="text" v-model="tempPrzedmiot" />
+      <input type="text" v-model="tempPrzedmiot"/>
 
       <label for="zaliczenie">Temat zaliczenia</label>
       <input type="text" v-model="tempZaliczenie" />
@@ -37,7 +37,7 @@
       <input type="checkbox" v-model="tempWazne"/>
 
       <div class="wrap">
-        <button class="zapisz">Dodaj</button>
+        <button class="zapisz">Aktualizuj</button>
       </div>
     </form>
   </div>
@@ -54,11 +54,13 @@ export default {
     return {
       zapis: [],
       pokazNotatke: true,
+
       tempPrzedmiot: "",
       tempZaliczenie: "",
       tempTermin: "",
       tempNotatka: "",
-      tempWazne: false
+      tempWazne: false,
+      tempId: ""
     };
   },
   mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
@@ -90,29 +92,52 @@ export default {
       });
       alert("Usuniętko notatke ["+id+"]");
     },
-    edytujNotatke(id){
+    async edytujNotatke(id){
       var element = document.getElementById("editForm");
-      let tempAll;
 
       element.hidden = !element.hidden;
       alert("Edytowanie notatki ["+id+"]");
 
-      console.log(id);
-      fetch("http://localhost:3000/notatki/"+id, {
-        method: 'GET'
-      })
-      .then((res) => {
-        res
-          .json()
-          .then(function(json){
-            tempAll = json;
-          })
-          .catch((err) => console.log(err.message));
-      });
-      console.log(tempAll)
+      const res = await fetch("http://localhost:3000/notatki/"+id)
+        .catch((error) => console.log("Error:",error));
+      const json = await res.json();   
+
+      var jsonParsed = JSON.parse(
+        JSON.stringify(json)
+      );
+
+      this.tempPrzedmiot = jsonParsed.przedmiot;
+      this.tempZaliczenie = jsonParsed.zaliczenie;
+      this.tempTermin =  jsonParsed.termin;
+      this.tempNotatka =  jsonParsed.notatka;
+      this.tempWazne =  jsonParsed.wazne;
+      this.tempId = jsonParsed.id;
     },
     edytujNotatkeForm(){
-      alert("Edytowano notatke ["+tempEditID+"]");
+
+      var edytowanaNotatka = {
+        przedmiot:this.tempPrzedmiot,
+        zaliczenie:this.tempZaliczenie,
+        termin:this.tempTermin,
+        notatka:this.tempNotatka,
+        wazne:this.tempWazne
+      };
+
+      console.log(edytowanaNotatka.przedmiot);
+
+      fetch("http://localhost:3000/notatki/"+this.tempId, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(edytowanaNotatka)
+      })
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     }
   },
 };

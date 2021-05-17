@@ -9,7 +9,8 @@
     <span class="usunOcene" @click="cofnijOcene">⌫</span>
     <span class="dodajOcene" @click="dodajOcene">&#9745;</span>
 
-    <br><span class="oceny" v-for="ocena in oceny" :key="ocena">{{ocena}}&nbsp;&nbsp;&nbsp;</span>
+    <br>
+    <span class="oceny" v-for="ocena in oceny" :key="ocena">[{{ocena}}] </span>
   </form>
   <button class="obliczSrednia" @click="obliczSrednia">Oblicz średnią</button>
   <button class="obliczSrednia" @click="resetujSrednia">Reset</button>

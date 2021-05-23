@@ -3,7 +3,7 @@
 
   <form>
     <label>Wpisz oceny</label>
-    <input placeholder="Kliknij enter, aby dodać..." type="text" v-model.number="ocena" @keypress.enter="dodajOcene" />
+    <input placeholder="Kliknij enter, aby dodać..." type="text" v-model.number="ocena" @keypress.enter="dodajOcene" class="ocenaTest" />
     <span class="errorMessage" v-show="pokazError">Wprowadź poprawną liczbę</span>
 
     <span class="usunOcene" @click="cofnijOcene">⌫</span>

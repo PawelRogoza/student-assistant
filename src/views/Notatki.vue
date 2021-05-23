@@ -15,7 +15,7 @@
         </div>
       </li>
     </ul>
-    <form id="editForm" hidden="true" @submit="edytujNotatkeForm">
+    <form id="editForm" v-show="pokazFormularz" @submit="edytujNotatkeForm">
       <label for="przedmiot">Przedmiot</label>
       <input type="text" v-model="tempPrzedmiot"/>
 
@@ -54,6 +54,7 @@ export default {
     return {
       zapis: [],
       pokazNotatke: true,
+      pokazFormularz: false,
 
       tempPrzedmiot: "",
       tempZaliczenie: "",
@@ -95,7 +96,7 @@ export default {
     async edytujNotatke(id){
       var element = document.getElementById("editForm");
 
-      element.hidden = !element.hidden;
+      this.pokazFormularz = !this.pokazFormularz
       alert("Edytowanie notatki ["+id+"]");
 
       const res = await fetch("http://localhost:3000/notatki/"+id)

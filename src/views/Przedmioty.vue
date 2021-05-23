@@ -3,19 +3,20 @@
     <h1>Przedmioty</h1>
     <form @submit="dodajNotatke">
       <label for="przedmiot">Przedmiot</label>
-      <input type="text" v-model="przedmiot" />
+      <input type="text" v-model="przedmiot" data-test="przedmiot" />
 
       <label for="zaliczenie">Temat zaliczenia</label>
-      <input type="text" v-model="zaliczenie" />
+      <input type="text" v-model="zaliczenie" data-test="zaliczenie" />
 
       <label for="termin">Termin zaliczenia</label>
-      <input type="date" v-model="termin" />
+      <input type="date" v-model="termin" data-test="termin" />
 
       <label for="notatki">Notatki</label>
-      <textarea placeholder="Wpisz swoją notatkę..." cols="30" rows="10" v-model="notatka"></textarea>
+      <textarea placeholder="Wpisz swoją notatkę..." cols="30" rows="10" v-model="notatka" data-test="notatka">
+      </textarea>
 
       <label id="wazne">Ważne: </label>
-      <input type="checkbox" v-model="wazne" value />
+      <input type="checkbox" v-model="wazne" value data-test="wazne" />
 
       <div class="wrap">
         <button class="zapisz">Dodaj</button>

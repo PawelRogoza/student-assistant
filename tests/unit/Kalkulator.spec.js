@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Kalkulator from '../../src/views/Kalkulator.vue';
 
+
 describe('Kalkulator', () => {
     test('dodawanie nowych ocen do listy przy użyciu przycisku', async () => {
         const wrapper = mount(Kalkulator)

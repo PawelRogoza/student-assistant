@@ -3,11 +3,14 @@
     <h1>Notatki</h1>
   </div>
   <div>
-    <ul class="notatkiLista" v-if="pokazNotatke">
+    <ul class="notatkiLista" v-show="pokazNotatke">
+    <button class="refresh" @click="odswiezKomponent">&#8635;</button>
       <li class="notatkiElement" v-for="notatka in zapis" :key="notatka">
         <button class="usun" @click="usunNotatke(notatka.id)">X</button>
-        <button class="edytuj" @click="edytujNotatke(notatka.id)">&#9998;</button>
-        <div class="notatkiContent" :class="{'wazne': notatka.wazne}">
+        <button class="edytuj" @click="edytujNotatke(notatka.id)">
+          &#9998;
+        </button>
+        <div class="notatkiContent" :class="{ wazne: notatka.wazne }">
           <strong>{{ notatka.przedmiot }}</strong> - {{ notatka.zaliczenie
           }}<br />
           {{ notatka.termin }}<br />
@@ -15,9 +18,10 @@
         </div>
       </li>
     </ul>
+
     <form id="editForm" v-show="pokazFormularz" @submit="edytujNotatkeForm">
       <label for="przedmiot">Przedmiot</label>
-      <input type="text" v-model="tempPrzedmiot"/>
+      <input type="text" v-model="tempPrzedmiot" />
 
       <label for="zaliczenie">Temat zaliczenia</label>
       <input type="text" v-model="tempZaliczenie" />
@@ -34,7 +38,7 @@
       ></textarea>
 
       <label id="wazne">Ważne: </label>
-      <input type="checkbox" v-model="tempWazne"/>
+      <input type="checkbox" v-model="tempWazne" />
 
       <div class="wrap">
         <button class="zapisz">Aktualizuj</button>
@@ -61,91 +65,113 @@ export default {
       tempTermin: "",
       tempNotatka: "",
       tempWazne: false,
-      tempId: ""
+      tempId: "",
+
+      refreshIndex: 0,
     };
   },
-  mounted() { // pobieranie listy notatek z db.json przy starcie komponentu
-    this.pobierzNotatki()
+  mounted() {
+    // pobieranie listy notatek z db.json przy starcie komponentu
+    this.pobierzNotatki();
   },
   methods: {
     pobierzNotatki() {
       fetch("http://localhost:3000/notatki").then((res) => {
-      res
-        .json()
-        .then((data) => (this.zapis = data))
-        .catch((err) => console.log(err.message));
-    });
+        res
+          .json()
+          .then((data) => (this.zapis = data))
+          .catch((err) => console.log(err.message));
+      });
     },
+
+    odswiezKomponent() {
+      window.location.reload(true);
+    },
+
     pokazNotatki() {
       this.pokazNotatke = !this.pokazNotatke;
       console.log("pokaz");
     },
-    usunNotatke(id){
-      fetch("http://localhost:3000/notatki/"+id, {
-        method: 'DELETE'
+
+    usunNotatke(id) {
+      fetch("http://localhost:3000/notatki/" + id, {
+        method: "DELETE",
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-      alert("Usuniętko notatke ["+id+"]");
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      alert("Usuniętko notatke [" + id + "]");
     },
-    async edytujNotatke(id){
-      var element = document.getElementById("editForm");
 
-      this.pokazFormularz = !this.pokazFormularz
-      alert("Edytowanie notatki ["+id+"]");
+    async edytujNotatke(id) {
+      this.pokazFormularz = !this.pokazFormularz;
+      alert("Edytowanie notatki [" + id + "]");
 
-      const res = await fetch("http://localhost:3000/notatki/"+id)
-        .catch((error) => console.log("Error:",error));
-      const json = await res.json();   
+      const res = await fetch(
+        "http://localhost:3000/notatki/" + id
+      ).catch((error) => console.log("Error:", error));
+      const json = await res.json();
 
-      var jsonParsed = JSON.parse(
-        JSON.stringify(json)
-      );
+      var jsonParsed = JSON.parse(JSON.stringify(json));
 
       this.tempPrzedmiot = jsonParsed.przedmiot;
       this.tempZaliczenie = jsonParsed.zaliczenie;
-      this.tempTermin =  jsonParsed.termin;
-      this.tempNotatka =  jsonParsed.notatka;
-      this.tempWazne =  jsonParsed.wazne;
+      this.tempTermin = jsonParsed.termin;
+      this.tempNotatka = jsonParsed.notatka;
+      this.tempWazne = jsonParsed.wazne;
       this.tempId = jsonParsed.id;
     },
-    edytujNotatkeForm(){
 
+    edytujNotatkeForm() {
       var edytowanaNotatka = {
-        przedmiot:this.tempPrzedmiot,
-        zaliczenie:this.tempZaliczenie,
-        termin:this.tempTermin,
-        notatka:this.tempNotatka,
-        wazne:this.tempWazne
+        przedmiot: this.tempPrzedmiot,
+        zaliczenie: this.tempZaliczenie,
+        termin: this.tempTermin,
+        notatka: this.tempNotatka,
+        wazne: this.tempWazne,
       };
 
       console.log(edytowanaNotatka.przedmiot);
 
-      fetch("http://localhost:3000/notatki/"+this.tempId, {
+      fetch("http://localhost:3000/notatki/" + this.tempId, {
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        method: 'PUT',
-        body: JSON.stringify(edytowanaNotatka)
+        method: "PUT",
+        body: JSON.stringify(edytowanaNotatka),
       })
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
   },
 };
 </script>
 
 <style>
 .wazne {
-  border: 1px solid lightseagreen;
+  border: 1px solid;
+}
+.refresh {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: lightseagreen;
+  color: white;
+  padding: 4px;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 30px;
+  width: 5%;
+}
+.refresh:hover {
+  transform: scale(1.1);
 }
 </style>

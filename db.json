@@ -9,35 +9,35 @@
       "id": 1
     },
     {
-      "przedmiot": "XD",
-      "zaliczenie": "Porzuczek - api",
-      "termin": "2021-05-29",
-      "notatka": "API dla Porzuczka - REST, C#, ASP.NET",
-      "wazne": "",
+      "przedmiot": "Przedmio2",
+      "zaliczenie": "Temat2",
+      "termin": "2021-05-15",
+      "notatka": "Notatka2",
+      "wazne": true,
       "id": 2
     },
     {
-      "przedmiot": "C#",
-      "zaliczenie": "Projekcik do łysego",
-      "termin": "2021-05-28",
-      "notatka": "Hehe :)",
+      "przedmiot": "Test1",
+      "zaliczenie": "Test1",
+      "termin": "",
+      "notatka": "Test1",
       "wazne": "",
       "id": 3
     },
     {
-      "przedmiot": "C#",
-      "zaliczenie": "Projekcik do łysego",
-      "termin": "2021-05-28",
-      "notatka": "Hehe :)",
+      "przedmiot": "Test2",
+      "zaliczenie": "Test2",
+      "termin": "",
+      "notatka": "Test2",
       "wazne": "",
       "id": 4
     },
     {
-      "przedmiot": "REST API",
-      "zaliczenie": "Porzuczek - api",
-      "termin": "2021-05-29",
-      "notatka": "API dla Porzuczka - REST, C#, ASP.NET",
-      "wazne": "",
+      "przedmiot": "Test3",
+      "zaliczenie": "Test3",
+      "termin": "",
+      "notatka": "Test3",
+      "wazne": true,
       "id": 5
     }
   ]

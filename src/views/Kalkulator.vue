@@ -3,7 +3,7 @@
 
   <form>
     <label>Wpisz oceny</label>
-    <input placeholder="Kliknij enter, aby dodać..." type="text" v-model.number="ocena" @keypress.enter="dodajOcene" class="ocenaTest" />
+    <input placeholder="Kliknij enter, aby dodać lub Esc by usunąć..." type="text" v-model.number="ocena" @keypress.enter="dodajOcene" class="ocenaTest" />
     <span class="errorMessage" v-show="pokazError">Wprowadź poprawną liczbę</span>
 
     <span class="usunOcene" @click="cofnijOcene">⌫</span>
@@ -48,12 +48,6 @@ export default {
     },
     cofnijOcene() {
       if(this.oceny != null && this.oceny.length > 0) this.oceny.pop();
-    },
-    dodajLPrzedmiotow(e) {
-      e.preventDefault();
-      if (this.lPrzedmiotow != null) {
-        this.pokazEnter = false
-      }
     },
     obliczSrednia() {
       var sum = this.oceny.reduce(function (a, b) {

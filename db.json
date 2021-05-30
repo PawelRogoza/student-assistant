@@ -31,14 +31,6 @@
       "notatka": "Test2",
       "wazne": "",
       "id": 4
-    },
-    {
-      "przedmiot": "Test3",
-      "zaliczenie": "Test3",
-      "termin": "",
-      "notatka": "Test3",
-      "wazne": true,
-      "id": 5
     }
   ]
 }

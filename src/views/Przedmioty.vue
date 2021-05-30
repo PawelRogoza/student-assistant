@@ -35,7 +35,7 @@ export default {
       zaliczenie:"",
       termin:"",
       notatka:"",
-      wazne:""
+      wazne:false
     }
   },
   methods: {
@@ -49,7 +49,7 @@ export default {
         wazne:this.wazne
       };
 
-      fetch("http://localhost:3000/notatki", {
+      fetch("https://localhost:44304/api/notes", {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'

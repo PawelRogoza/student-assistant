@@ -6,7 +6,7 @@
     <ul class="notatkiLista" v-show="pokazNotatke">
     <button class="refresh" @click="odswiezKomponent">&#8635;</button>
       <li class="notatkiElement" v-for="notatka in zapis" :key="notatka">
-        <button class="usun" @click="usunNotatke(notatka.id)">X</button>
+        <button class="usun" @click="usunNotatke(notatka.id)" data-test='usun'>X</button>
         <button class="edytuj" @click="edytujNotatke(notatka.id)">
           &#9998;
         </button>
@@ -66,8 +66,6 @@ export default {
       tempNotatka: "",
       tempWazne: false,
       tempId: "",
-
-      refreshIndex: 0,
     };
   },
   mounted() {
@@ -76,7 +74,7 @@ export default {
   },
   methods: {
     pobierzNotatki() {
-      fetch("http://localhost:3000/notatki").then((res) => {
+      fetch("https://localhost:44304/api/notes").then((res) => {
         res
           .json()
           .then((data) => (this.zapis = data))
@@ -94,7 +92,7 @@ export default {
     },
 
     usunNotatke(id) {
-      fetch("http://localhost:3000/notatki/" + id, {
+      fetch("https://localhost:44304/api/notes/" + id, {
         method: "DELETE",
       })
         .then((response) => response.json())
@@ -102,7 +100,7 @@ export default {
           console.log("Success:", data);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.log("Error:", error);
         });
       alert("Usuniętko notatke [" + id + "]");
     },
@@ -112,7 +110,7 @@ export default {
       alert("Edytowanie notatki [" + id + "]");
 
       const res = await fetch(
-        "http://localhost:3000/notatki/" + id
+        "https://localhost:44304/api/notes/" + id
       ).catch((error) => console.log("Error:", error));
       const json = await res.json();
 
@@ -128,6 +126,7 @@ export default {
 
     edytujNotatkeForm() {
       var edytowanaNotatka = {
+        id: this.tempId,
         przedmiot: this.tempPrzedmiot,
         zaliczenie: this.tempZaliczenie,
         termin: this.tempTermin,
@@ -135,9 +134,7 @@ export default {
         wazne: this.tempWazne,
       };
 
-      console.log(edytowanaNotatka.przedmiot);
-
-      fetch("http://localhost:3000/notatki/" + this.tempId, {
+      fetch("https://localhost:44304/api/notes/" + this.tempId, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -148,7 +145,7 @@ export default {
           console.log("Success:", data);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.log("Error:", error);
         });
     },
   },

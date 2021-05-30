@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Przedmiot from '../../src/views/Przedmioty.vue'
 
-jest.mock('../../db.json')
-
+global.fetch = jest.fn(() => Promise.resolve());
 
 describe('Przedmioty', () => {
     test('poprawne przekazywanie danych użytkownika z formularza do zmiennych', async () => {
@@ -20,6 +19,4 @@ describe('Przedmioty', () => {
         expect(wrapper.vm.notatka).toBe("vue web app")
         expect(wrapper.vm.wazne).toBe(true)
     })
-
-
 })

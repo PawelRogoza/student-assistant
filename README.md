@@ -1,3 +1,4 @@
+
 An application that helps students with:
 
 ▪organizing their work
@@ -8,7 +9,7 @@ An application that helps students with:
 
 ▪counting the grade point average
 
-![vue1](https://user-images.githubusercontent.com/61240120/120102138-e98c6e00-c149-11eb-9231-2c44be327bd8.png)
+![Screenshot_4](https://user-images.githubusercontent.com/61461340/120159272-4bee7880-c1f5-11eb-8cb3-17a2b45eb694.png)
 
 
 
